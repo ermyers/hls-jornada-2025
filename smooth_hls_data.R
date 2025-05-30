@@ -65,6 +65,8 @@ ggplot() +
   ggtitle("jershrubland2")
 
 # Save outputs
-save(hls_data, hls_smooth_data, file="outputs/hls_ec_towers_smoothed.RData")
+hls_ec_towers <- hls_data
+hls_ec_towers_smoothed <- hls_smooth_data
+save(hls_ec_towers, hls_ec_towers_smoothed, file="outputs/hls_ec_towers_smoothed.RData")
 write.csv(hls_data,"outputs/hls_ec_towers.csv", row.names = FALSE)
 write.csv(hls_smooth_data,"outputs/hls_ec_towers_smoothed.csv", row.names = FALSE)
