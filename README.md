@@ -1,7 +1,10 @@
 # hls-jornada-2025
 2025 updated code for downloading HLS imagery over the Jornada Experimental Range and extracting time-series information at eddy covariance tower locations.
 
-Previous code (used for https://spj.science.org/doi/10.34133/remotesensing.0190) remains available on figshare: https://figshare.com/collections/Novel_use_of_image_time_series_to_distinguish_dryland_vegetation_responses_to_wet_and_dry_years/6830721
+Previous code (used for https://spj.science.org/doi/10.34133/remotesensing.0190) remains available on figshare:
+https://figshare.com/collections/Novel_use_of_image_time_series_to_distinguish_dryland_vegetation_responses_to_wet_and_dry_years/6830721
+
+For more information on the HLS v2.0 data product, you can read the HLS_User_Guide_V2, uploaded as a PDF to this repository.
 
 ## To download HLS imagery
 Follow the setup instructions at https://github.com/nasa/HLS-Data-Resources/tree/main/bash/hls-bulk-download
