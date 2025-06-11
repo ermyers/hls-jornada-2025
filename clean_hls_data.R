@@ -107,7 +107,9 @@ hls_csv_to_df <- function(filename){
 # Put HLS data from all phenocams into one dataframe
 hls_data_center <- rbind(hls_csv_to_df('outputs/ec_locations_2021-2025/jergrassland2_center.csv'),
                          hls_csv_to_df('outputs/ec_locations_2021-2025/jernovel2_center.csv'),
-                         hls_csv_to_df('outputs/ec_locations_2021-2025/jershrubland2_center.csv'))
+                         hls_csv_to_df('outputs/ec_locations_2021-2025/jershrubland2_center.csv'),
+                         hls_csv_to_df('outputs/ec_locations_2021-2025/jerbajada_center.csv'),
+                         hls_csv_to_df('outputs/ec_locations_2021-2025/NEON.D14.JORN.DP1.00033_center.csv'))
 
 # hls_data_center <- rbind(hls_csv_to_df('data/outputs_HLS/jershrubland_center.csv'),
 #                          hls_csv_to_df('data/outputs_HLS/jershrubland2_center.csv'),

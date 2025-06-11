@@ -19,9 +19,9 @@ library(ggplot2)
 
 hls_data <- hls_center_clean
 #hls_data <- cbind(hls_data,EVI_smooth=0)
-hls_smooth_data <- data.frame(matrix(ncol = 8, nrow = 0))
+hls_smooth_data <- data.frame(matrix(ncol = 9, nrow = 0))
 colnames(hls_smooth_data) <- c('DATE', 'YEAR', 'DOY', 'PHENOCAM_NAME', 'ECO_STATE',
-                          'LOESS_SPAN', 'EVI_smooth', 'GCC_smooth')
+                          'LOESS_SPAN', 'EVI_smooth', 'NDVI_smooth', 'GCC_smooth')
 loess_span <- 0.03
 
 for (camera in unique(hls_data$PHENOCAM_NAME)){
@@ -34,6 +34,7 @@ for (camera in unique(hls_data$PHENOCAM_NAME)){
   year <- year(as.Date(date_range, origin = "1970-01-01"))
   doy <- yday(as.Date(date_range, origin = "1970-01-01"))
   EVI_smooth <- predict(loess(EVI ~ DATE, data=subset, span=loess_span, control=loess.control(surface="direct")),newdata=date_range)
+  NDVI_smooth <- predict(loess(NDVI ~ DATE, data=subset, span=loess_span, control=loess.control(surface="direct")),newdata=date_range)
   GCC_smooth <- predict(loess(GCC ~ DATE, data=subset, span=loess_span, control=loess.control(surface="direct")),newdata=date_range)
   subset_smooth <- data.frame(DATE = as.Date(date_range,origin="1970-01-01"),
                               YEAR = year,
@@ -42,6 +43,7 @@ for (camera in unique(hls_data$PHENOCAM_NAME)){
                               ECO_STATE = eco_state,
                               LOESS_SPAN = loess_span,
                               EVI_smooth = EVI_smooth,
+                              NDVI_smooth = NDVI_smooth,
                               GCC_smooth = GCC_smooth)
   hls_smooth_data <- rbind(hls_smooth_data,subset_smooth)
 }
@@ -63,6 +65,16 @@ ggplot() +
   geom_point(data = hls_data[hls_data$PHENOCAM_NAME=="jershrubland2",], aes(x=DATE,y=EVI)) +
   geom_line(data = hls_smooth_data[hls_smooth_data$PHENOCAM_NAME=="jershrubland2",], aes(x=DATE,y=EVI_smooth), color='red') +
   ggtitle("jershrubland2")
+
+ggplot() +
+  geom_point(data = hls_data[hls_data$PHENOCAM_NAME=="jerbajada",], aes(x=DATE,y=EVI)) +
+  geom_line(data = hls_smooth_data[hls_smooth_data$PHENOCAM_NAME=="jerbajada",], aes(x=DATE,y=EVI_smooth), color='red') +
+  ggtitle("jerbajada")
+
+ggplot() +
+  geom_point(data = hls_data[hls_data$PHENOCAM_NAME=="NEON.D14.JORN.DP1.00033",], aes(x=DATE,y=NDVI)) +
+  geom_line(data = hls_smooth_data[hls_smooth_data$PHENOCAM_NAME=="NEON.D14.JORN.DP1.00033",], aes(x=DATE,y=NDVI_smooth), color='red') +
+  ggtitle("NEON.D14.JORN.DP1.00033")
 
 # Save outputs
 hls_ec_towers <- hls_data
